@@ -1,0 +1,52 @@
+const readline = require('readline-sync');
+
+// Player's inventory
+const hasTorch = true;
+const hasMap = false;
+const hasSword = false;
+const hasCompass = true;
+
+// Game introduction
+console.log("You wake up in a dark forest. There are two paths ahead of you:");
+console.log("One leads to the mountains, and the other to a village.");
+console.log("Your choices will determine your fate!");
+
+// First choice: mountains or village
+const choice = readline.question("Do you go to the 'mountains' or the 'village'? ");
+
+if (choice === "mountains") {
+  console.log("You head towards the mountains...");
+
+  if (hasTorch) {
+    console.log("Your torch lights the way, and you safely navigate through the dark mountains.");
+    console.log("At the top, you find a treasure chest!");
+
+    if (hasSword) {
+      console.log("You use your sword to break the lock and claim the treasure!");
+    } else {
+      console.log("You don't have a sword to open the chest. You leave it behind.");
+    }
+  } else {
+    console.log("It's too dark to proceed. You decide to turn back.");
+  }
+} else if (choice === "village") {
+  console.log("You head towards the village...");
+
+  if (hasMap || hasCompass) {
+    console.log("With the help of your map or compass, you find your way to the village.");
+    console.log("The villagers welcome you and offer food and shelter.");
+
+    const helpVillage = readline.question("Do you help the villagers fight off bandits? (yes/no) ");
+    if (helpVillage === "yes" && hasSword) {
+      console.log("You bravely fight alongside the villagers and defeat the bandits!");
+    } else if (helpVillage === "yes" && !hasSword) {
+      console.log("You try to help, but without a sword, you are forced to retreat.");
+    } else {
+      console.log("You decide not to help and stay safe in the village.");
+    }
+  } else {
+    console.log("Without a map or compass, you get lost and wander aimlessly.");
+  }
+} else {
+  console.log("You hesitate and get lost in the forest.");
+}
